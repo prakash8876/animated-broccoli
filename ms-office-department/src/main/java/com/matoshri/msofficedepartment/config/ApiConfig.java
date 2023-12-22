@@ -1,5 +1,6 @@
 package com.matoshri.msofficedepartment.config;
 
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -11,6 +12,7 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync
 @EnableTransactionManagement
+@EnableDiscoveryClient
 public class ApiConfig {
     @Bean
     public Executor taskExecutor() {
