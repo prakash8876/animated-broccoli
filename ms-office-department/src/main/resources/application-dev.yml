@@ -1,1 +1,24 @@
 
+spring:
+  datasource:
+    url: "jdbc:h2:mem:department-db"
+    driverClassName: "org.h2.Driver"
+    username: "sa"
+    password: "password"
+  jpa:
+    hibernate:
+      auto-ddl: "update"
+    open-in-view: false
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    org.hibernate.SQL: "DEBUG"
