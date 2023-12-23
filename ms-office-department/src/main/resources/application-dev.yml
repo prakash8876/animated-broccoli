@@ -1,0 +1,40 @@
+server:
+  port: 8081
+  servlet:
+    context-path: "/office"
+spring:
+  output:
+    ansi:
+      enabled: "ALWAYS"
+  application:
+    name: "department-service"
+  datasource:
+    url: "jdbc:h2:mem:department-db"
+    driverClassName: "org.h2.Driver"
+    username: "sa"
+    password: "password"
+  jpa:
+    hibernate:
+      auto-ddl: "update"
+    open-in-view: false
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    org.hibernate.SQL: "DEBUG"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "http://localhost:8761/eureka/"
