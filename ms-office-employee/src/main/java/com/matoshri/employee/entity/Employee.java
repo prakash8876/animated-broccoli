@@ -3,6 +3,8 @@ package com.matoshri.employee.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -73,6 +75,19 @@ public class Employee {
 
     public void setDepId(Long depId) {
         this.depId = depId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(empId, employee.empId) && Objects.equals(empEmail, employee.empEmail) && Objects.equals(empName, employee.empName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(empId, empEmail, empName);
     }
 
     @Override

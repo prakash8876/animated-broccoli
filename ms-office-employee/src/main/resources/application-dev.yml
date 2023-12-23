@@ -26,7 +26,7 @@ spring:
       INDENT_OUTPUT: true
 management:
   endpoints:
-    jmx:
+    web:
       exposure:
         include: "health,info"
 
