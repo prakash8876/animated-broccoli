@@ -24,10 +24,9 @@ public class Department {
     public Department() {
     }
 
-    public Department(Long deptId, String deptName, List<Employee> employees) {
+    public Department(Long deptId, String deptName) {
         this.deptId = deptId;
         this.deptName = deptName;
-        this.employees = employees;
     }
 
     public Long getDeptId() {

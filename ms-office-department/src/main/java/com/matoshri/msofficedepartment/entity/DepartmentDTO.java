@@ -17,10 +17,9 @@ public class DepartmentDTO {
     public DepartmentDTO() {
     }
 
-    public DepartmentDTO(Long deptId, String deptName, List<Employee> employees) {
+    public DepartmentDTO(Long deptId, String deptName) {
         this.deptId = deptId;
         this.deptName = deptName;
-        this.employees = employees;
     }
 
     public Long getDeptId() {
