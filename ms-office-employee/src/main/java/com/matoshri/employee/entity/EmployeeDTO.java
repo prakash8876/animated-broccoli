@@ -1,5 +1,6 @@
 package com.matoshri.employee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 
 import java.io.Serial;
@@ -9,21 +10,22 @@ public class EmployeeDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -7187928829922407535L;
     private Long empId;
-    private String empEmail;
-    @Email(message = "Enter proper email address.")
+
     private String empName;
+    @Email(message = "Enter proper email address.")
+    private String empEmail;
     private Long depId;
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String empEmail, String empName, Long depId) {
+    public EmployeeDTO(String empName, String empEmail, Long depId) {
         this.empEmail = empEmail;
         this.empName = empName;
         this.depId = depId;
     }
 
-    public EmployeeDTO(Long empId, String empEmail, String empName, Long depId) {
+    public EmployeeDTO(Long empId, String empName, String empEmail, Long depId) {
         this.empId = empId;
         this.empEmail = empEmail;
         this.empName = empName;
@@ -66,8 +68,8 @@ public class EmployeeDTO implements Serializable {
     public String toString() {
         return new StringBuilder("Employee{")
                 .append("empId=").append(empId)
-                .append(", empEmail='").append(empEmail)
                 .append(", empName='").append(empName)
+                .append(", empEmail='").append(empEmail)
                 .append(", depId=").append(depId)
                 .append('}').toString();
     }

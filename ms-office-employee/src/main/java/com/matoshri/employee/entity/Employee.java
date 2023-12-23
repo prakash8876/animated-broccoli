@@ -9,28 +9,34 @@ public class Employee {
     @Id
     @SequenceGenerator(
             name = "emp_seq",
-            allocationSize = 100
+            allocationSize = 1,
+            initialValue = 100
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "emp_seq"
     )
+    @Column(name = "empId")
     private Long empId;
-    private String empEmail;
+    @Column(name = "empEmail", length = 50)
     @Email(message = "Enter proper email address.")
+    private String empEmail;
+
+    @Column(name = "empName", length = 20)
     private String empName;
+    @Column(name = "emp_dep_id")
     private Long depId;
 
     public Employee() {
     }
 
-    public Employee(String empEmail, String empName, Long depId) {
+    public Employee(String empName, String empEmail, Long depId) {
         this.empEmail = empEmail;
         this.empName = empName;
         this.depId = depId;
     }
 
-    public Employee(Long empId, String empEmail, String empName, Long depId) {
+    public Employee(Long empId, String empName, String empEmail, Long depId) {
         this.empId = empId;
         this.empEmail = empEmail;
         this.empName = empName;
@@ -73,8 +79,8 @@ public class Employee {
     public String toString() {
         return new StringBuilder("Employee{")
                 .append(" empId=").append(empId)
-                .append(", empEmail='").append(empEmail)
                 .append(", empName='").append(empName)
+                .append(", empEmail='").append(empEmail)
                 .append(", depId=").append(depId)
                 .append('}').toString();
     }
