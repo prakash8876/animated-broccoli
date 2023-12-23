@@ -1,6 +1,10 @@
 server:
   port: 8082
+  servlet:
+    context-path: "/office"
 spring:
+  application:
+    name: "employee-service"
   output:
     ansi:
       enabled: "ALWAYS"
@@ -17,6 +21,9 @@ spring:
   h2:
     console:
       enabled: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
 management:
   endpoints:
     jmx:

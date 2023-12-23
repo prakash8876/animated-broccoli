@@ -1,5 +1,7 @@
 server:
   port: 8081
+  servlet:
+    context-path: "/office"
 spring:
   output:
     ansi:
@@ -19,6 +21,9 @@ spring:
   h2:
     console:
       enabled: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
 management:
   endpoints:
     jmx:
