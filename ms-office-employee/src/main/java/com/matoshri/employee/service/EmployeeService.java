@@ -9,4 +9,6 @@ public interface EmployeeService {
     List<EmployeeDTO> getAllEmployees() throws ExecutionException, InterruptedException;
 
     Long saveEmployee(EmployeeDTO dto);
+
+    EmployeeDTO getEmployeeById(Long empId);
 }

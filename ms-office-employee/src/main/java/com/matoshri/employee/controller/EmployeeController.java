@@ -2,6 +2,7 @@ package com.matoshri.employee.controller;
 
 import com.matoshri.employee.entity.EmployeeDTO;
 import com.matoshri.employee.service.EmployeeService;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/office/employee")
@@ -25,13 +27,14 @@ public class EmployeeController {
         this.empService = empService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/get/all")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
         List<EmployeeDTO> employees = new ArrayList<>();
         try {
             employees = empService.getAllEmployees();
-        } catch (Exception e) {
-            log.error("Exception: {}", e);
+            log.info("Fetched {} employees", employees.size());
+        } catch (ExecutionException | InterruptedException e) {
+            log.error("Exception: {}", ExceptionUtils.getStackTrace(e));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(employees);
         }
         return ResponseEntity.ok(employees);
@@ -39,7 +42,15 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public ResponseEntity<Long> saveEmployee(@RequestBody @Validated EmployeeDTO dto) {
-        Long empId = empService.saveEmployee(dto);
-        return ResponseEntity.ok(empId);
+        long empId = empService.saveEmployee(dto);
+        log.info("saved employee with id {}", empId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(empId);
+    }
+
+    @GetMapping("/get/byid/{employee-id}")
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
+        EmployeeDTO employeeById = empService.getEmployeeById(empId);
+        log.info("Fetched employee of ID {}", employeeById.getEmpId());
+        return ResponseEntity.ok(employeeById);
     }
 }

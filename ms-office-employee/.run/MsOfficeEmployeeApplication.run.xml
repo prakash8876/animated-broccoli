@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MsOfficeEmployeeApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="C:/Java/jdk-17" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="-Dspring.profiles.active" value="dev" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.matoshri.employee.MsOfficeEmployeeApplication" />
+    <module name="ms-office-employee" />
+    <shortenClasspath name="ARGS_FILE" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.matoshri.employee.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
