@@ -2,7 +2,7 @@ package com.matoshri.employee.service;
 
 import com.matoshri.employee.entity.Employee;
 import com.matoshri.employee.entity.EmployeeDTO;
-import com.matoshri.employee.exception.ResourceNotFoundException;
+import com.matoshri.employee.exception.EmployeeNotFoundException;
 import com.matoshri.employee.repo.EmployeeRepository;
 import com.matoshri.employee.util.Constants;
 import com.matoshri.employee.util.EmployeeMapper;
@@ -54,7 +54,7 @@ class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO getEmployeeById(Long empId) {
         log.info("Getting employee of ID {}", empId);
         Employee employee = empRepo.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException(Constants.NOT_EXISTS + empId));
+                .orElseThrow(() -> new EmployeeNotFoundException(empId));
         return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpEmail(), employee.getDepId());
     }
 }

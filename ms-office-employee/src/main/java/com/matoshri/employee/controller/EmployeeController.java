@@ -26,7 +26,7 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/get/all")
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+    ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
         List<EmployeeDTO> employees = new ArrayList<>();
         try {
             employees = empService.getAllEmployees();
@@ -39,14 +39,14 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Long> saveEmployee(@RequestBody @Validated EmployeeDTO dto) {
+    ResponseEntity<Long> saveEmployee(@RequestBody @Validated EmployeeDTO dto) {
         long empId = empService.saveEmployee(dto);
         log.info("saved employee with id {}", empId);
         return ResponseEntity.status(HttpStatus.CREATED).body(empId);
     }
 
     @GetMapping(value = "/get/byid/{employee-id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
+    ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
         EmployeeDTO employeeById = empService.getEmployeeById(empId);
         log.info("Fetched employee of ID {}", employeeById.empId());
         return ResponseEntity.ok(employeeById);
