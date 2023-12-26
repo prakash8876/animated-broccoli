@@ -39,7 +39,7 @@ public class ApiConfig {
     @Bean
     CommandLineRunner runner(DepartmentRepository repo) {
         return args -> {
-            Path path = Paths.get("");
+            Path path = Paths.get("src/main/resources/data/mock-data.json");
             if ((repo.count() == 0L) && Files.exists(path)) {
                 ArrayList<Department> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
                         TypeToken.getParameterized(ArrayList.class, Department.class).getType());
