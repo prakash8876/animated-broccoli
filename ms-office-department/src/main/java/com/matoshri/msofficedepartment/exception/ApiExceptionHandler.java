@@ -17,4 +17,9 @@ public class ApiExceptionHandler {
     public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
     }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ProblemDetail handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
 }
