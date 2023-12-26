@@ -8,7 +8,6 @@ import com.matoshri.employee.util.Constants;
 import com.matoshri.employee.util.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,6 @@ class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository empRepo;
     private final EmployeeMapper mapper;
 
-    @Autowired
     public EmployeeServiceImpl(EmployeeRepository empRepo, EmployeeMapper mapper) {
         this.empRepo = empRepo;
         this.mapper = mapper;
@@ -47,7 +45,7 @@ class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public Long saveEmployee(EmployeeDTO dto) {
         log.info("Saving employee {}", dto);
-        Employee emp = new Employee(dto.getEmpName(), dto.getEmpEmail(), dto.getDepId());
+        Employee emp = new Employee(dto.empName(), dto.empEmail(), dto.depId());
         emp = empRepo.save(emp);
         return emp.getEmpId();
     }

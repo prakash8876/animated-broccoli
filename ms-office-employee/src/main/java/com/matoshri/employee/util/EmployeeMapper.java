@@ -12,10 +12,10 @@ public class EmployeeMapper {
     private EmployeeMapper() {}
 
     public Employee mapToEmployee(EmployeeDTO dto) {
-        if (Objects.nonNull(dto.getEmpId())) {
-            return new Employee(dto.getEmpId(), dto.getEmpName(), dto.getEmpEmail(), dto.getDepId());
+        if (Objects.nonNull(dto.empId())) {
+            return new Employee(dto.empId(), dto.empName(), dto.empEmail(), dto.depId());
         } else {
-            return new Employee(dto.getEmpName(), dto.getEmpEmail(), dto.getDepId());
+            return new Employee(dto.empName(), dto.empEmail(), dto.empId());
         }
     }
 

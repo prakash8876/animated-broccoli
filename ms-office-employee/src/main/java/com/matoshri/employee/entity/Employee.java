@@ -11,6 +11,7 @@ public class Employee {
     @Id
     @SequenceGenerator(
             name = "emp_seq",
+            sequenceName = "emp_seq",
             allocationSize = 1,
             initialValue = 100
     )
