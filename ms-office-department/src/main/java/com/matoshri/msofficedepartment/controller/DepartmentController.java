@@ -32,14 +32,14 @@ public class DepartmentController {
     @GetMapping(value = "/byid/{dept-id}")
     @ResponseStatus(HttpStatus.OK)
     DepartmentDTO getById(@PathVariable("dept-id") Long deptId) {
-        log.info("Getting Department by ID {}", deptId);
+        log.info("Getting Department by ID {} ...", deptId);
         return deptService.findById(deptId);
     }
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save")
     @ResponseStatus(HttpStatus.CREATED)
     Long saveDepartment(@RequestBody @Validated DepartmentDTO dto) {
-        log.info("Saving department {}", dto);
+        log.info("Saving department {} ...", dto);
         return deptService.save(dto);
     }
 }
