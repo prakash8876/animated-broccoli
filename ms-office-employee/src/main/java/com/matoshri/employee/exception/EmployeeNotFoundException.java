@@ -1,22 +1,25 @@
 package com.matoshri.employee.exception;
 
+import com.matoshri.employee.util.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
-import java.io.Serializable;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException
-        extends RuntimeException
-        implements Serializable {
+public class EmployeeNotFoundException
+        extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1710960909213813729L;
 
-    public ResourceNotFoundException() {
+    public EmployeeNotFoundException() {
     }
 
-    public ResourceNotFoundException(String message) {
+    public EmployeeNotFoundException(String message) {
         super(message);
+    }
+
+    public EmployeeNotFoundException(Long empId) {
+        super(Constants.NOT_EXISTS + empId);
     }
 }

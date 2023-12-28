@@ -11,22 +11,30 @@ import java.util.Objects;
 public class Department {
 
     @Id
-    @SequenceGenerator(name = "dept_seq", allocationSize = 1, initialValue = 100)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_seq")
+    @SequenceGenerator(
+            name = "dept_seq",
+            sequenceName = "dept_seq",
+            allocationSize = 1,
+            initialValue = 1000
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "dept_seq"
+    )
     @Column(name = "deptId")
     private Long deptId;
 
     @Column(name = "dept_name")
     private String deptName;
 
+    @OneToMany
     @Column(name = "dept_employees")
     private List<Employee> employees = new ArrayList<>();
 
     public Department() {
     }
 
-    public Department(Long deptId, String deptName) {
-        this.deptId = deptId;
+    public Department(String deptName) {
         this.deptName = deptName;
     }
 

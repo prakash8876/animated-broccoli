@@ -1,18 +1,12 @@
 package com.matoshri.msofficedepartment.entity;
 
-import jakarta.persistence.Column;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentDTO {
-    private Long deptId;
-
-    @Column(name = "dept_name")
-    private String deptName;
-
-    @Column(name = "dept_employees")
-    private List<Employee> employees = new ArrayList<>();
+        private Long deptId;
+        private String deptName;
+        private List<Employee> employees = new ArrayList<>();
 
     public DepartmentDTO() {
     }
@@ -44,13 +38,5 @@ public class DepartmentDTO {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("DepartmentDTO{")
-                .append("deptId=").append(deptId)
-                .append(", deptName='").append(deptName)
-                .append('}').toString();
     }
 }
