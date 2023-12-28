@@ -27,6 +27,7 @@ public class Department {
     @Column(name = "dept_name")
     private String deptName;
 
+    @OneToMany
     @Column(name = "dept_employees")
     private List<Employee> employees = new ArrayList<>();
 

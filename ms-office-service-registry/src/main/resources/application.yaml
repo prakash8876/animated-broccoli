@@ -2,6 +2,9 @@ server:
   port: 8761
 
 spring:
+  output:
+    ansi:
+      enabled: "ALWAYS"
   application:
     name: "service-registry"
 
