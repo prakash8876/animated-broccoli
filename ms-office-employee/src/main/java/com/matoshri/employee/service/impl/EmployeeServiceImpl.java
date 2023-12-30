@@ -69,7 +69,7 @@ class EmployeeServiceImpl implements EmployeeService {
   public void generateReport() {
     log.info("generating report of employees ...");
     List<EmployeeDTO> employeeDTOS = empRepo.findAll().stream().map(EmployeeMapper::mapToDTO).toList();
-    Path path = Paths.get(dataPath + "employee_report_" + LocalDate.now() + ".json");
+    Path path = Paths.get(dataPath + "/employee_report_" + LocalDate.now() + ".json");
     try {
       String jsonData =
           new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(employeeDTOS);
