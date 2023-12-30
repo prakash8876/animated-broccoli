@@ -21,8 +21,8 @@ spring:
   jackson:
     serialization:
       INDENT_OUTPUT: true
-#  config:
-#    import: "optional:configserver:http://localhost:8088"
+  config:
+    import: "optional:configserver:http://localhost:8088"
 management:
   endpoints:
     web:
