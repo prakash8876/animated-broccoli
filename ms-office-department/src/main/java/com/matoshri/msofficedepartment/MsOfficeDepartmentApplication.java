@@ -8,8 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class MsOfficeDepartmentApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MsOfficeDepartmentApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(MsOfficeDepartmentApplication.class, args);
+  }
 }

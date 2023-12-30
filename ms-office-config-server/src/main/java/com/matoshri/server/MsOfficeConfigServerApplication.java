@@ -8,8 +8,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @EnableConfigServer
 public class MsOfficeConfigServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MsOfficeConfigServerApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(MsOfficeConfigServerApplication.class, args);
+  }
 }

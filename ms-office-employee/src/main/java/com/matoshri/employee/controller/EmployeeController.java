@@ -19,38 +19,38 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
-    private final EmployeeService empService;
+  private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
+  private final EmployeeService empService;
 
-    @Autowired
-    public EmployeeController(EmployeeService empService) {
-        this.empService = empService;
-    }
+  @Autowired
+  public EmployeeController(EmployeeService empService) {
+    this.empService = empService;
+  }
 
-    @GetMapping(value = "/get/all")
-    ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
-        List<EmployeeDTO> employees = new ArrayList<>();
-        try {
-            employees = empService.getAllEmployees();
-            log.info("Fetched {} employees", employees.size());
-        } catch (ExecutionException | InterruptedException e) {
-            log.warn("Interrupted! {}", ExceptionUtils.getStackTrace(e));
-            Thread.currentThread().interrupt();
-        }
-        return ResponseEntity.ok(employees);
+  @GetMapping(value = "/get/all")
+  ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+    List<EmployeeDTO> employees = new ArrayList<>();
+    try {
+      employees = empService.getAllEmployees();
+      log.info("Fetched {} employees", employees.size());
+    } catch (ExecutionException | InterruptedException e) {
+      log.warn("Interrupted! {}", ExceptionUtils.getStackTrace(e));
+      Thread.currentThread().interrupt();
     }
+    return ResponseEntity.ok(employees);
+  }
 
-    @PostMapping(value = "/save")
-    ResponseEntity<Long> saveEmployee(@RequestBody @Validated EmployeeDTO dto) {
-        long empId = empService.saveEmployee(dto);
-        log.info("saved employee with id {}", empId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(empId);
-    }
+  @PostMapping(value = "/save")
+  ResponseEntity<Long> saveEmployee(@RequestBody @Validated EmployeeDTO dto) {
+    long empId = empService.saveEmployee(dto);
+    log.info("saved employee with id {}", empId);
+    return ResponseEntity.status(HttpStatus.CREATED).body(empId);
+  }
 
-    @GetMapping(value = "/get/byid/{employee-id}")
-    ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
-        EmployeeDTO employeeById = empService.getEmployeeById(empId);
-        log.info("Fetched employee of ID {}", employeeById.empId());
-        return ResponseEntity.ok(employeeById);
-    }
+  @GetMapping(value = "/get/byid/{employee-id}")
+  ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
+    EmployeeDTO employeeById = empService.getEmployeeById(empId);
+    log.info("Fetched employee of ID {}", employeeById.empId());
+    return ResponseEntity.ok(employeeById);
+  }
 }
