@@ -5,6 +5,13 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.matoshri.employee.entity.Employee;
 import com.matoshri.employee.repo.EmployeeRepository;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,17 +19,14 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.concurrent.Executor;
-
 @Configuration
 @EnableAsync
 @EnableTransactionManagement
 public class ApiConfig {
+
+  @Value("${data.path}")
+  private String dataPath;
+
   @Bean
   public Executor taskExecutor() {
     ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -35,14 +39,14 @@ public class ApiConfig {
   }
 
   @Bean
-  CommandLineRunner runner(EmployeeRepository empRepo) {
+  public CommandLineRunner run(EmployeeRepository empRepo) throws Exception {
     return args -> {
-      Path path = Paths.get("src/main/resources/data/mock-data.json");
-      if ((empRepo.count() == 0L) && Files.exists(path)) {
-        ArrayList<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
-                    TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
-        empRepo.saveAll(list);
-      }
+    Path path = Paths.get(dataPath + "/mock-data.json");
+    if ((empRepo.count() == 0L) && Files.exists(path)) {
+      ArrayList<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
+              TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
+      empRepo.saveAll(list);
+    }
     };
   }
 }

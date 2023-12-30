@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 import com.matoshri.employee.util.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
 class EmployeeServiceImpl implements EmployeeService {
 
   private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+  @Value("${data.path}")
+  public String dataPath;
   private final EmployeeRepository empRepo;
 
-  @Autowired
   public EmployeeServiceImpl(EmployeeRepository empRepo) {
     this.empRepo = empRepo;
   }
@@ -67,7 +69,7 @@ class EmployeeServiceImpl implements EmployeeService {
   public void generateReport() {
     log.info("generating report of employees ...");
     List<EmployeeDTO> employeeDTOS = empRepo.findAll().stream().map(EmployeeMapper::mapToDTO).toList();
-    Path path = Paths.get("src/main/resources/data/employee_report_" + LocalDate.now() + ".json");
+    Path path = Paths.get(dataPath + "employee_report_" + LocalDate.now() + ".json");
     try {
       String jsonData =
           new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(employeeDTOS);
