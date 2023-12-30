@@ -2,6 +2,7 @@ package com.matoshri.employee.controller;
 
 import com.matoshri.employee.entity.EmployeeDTO;
 import com.matoshri.employee.service.EmployeeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
+@Tag(name = "EMPLOYEE_TAG")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
