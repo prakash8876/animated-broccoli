@@ -10,7 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -39,14 +43,14 @@ public class ApiConfig {
   }
 
   @Bean
-  public CommandLineRunner run(EmployeeRepository empRepo) throws Exception {
+  CommandLineRunner run(EmployeeRepository empRepo) {
     return args -> {
-    Path path = Paths.get(dataPath + "/mock-data.json");
-    if ((empRepo.count() == 0L) && Files.exists(path)) {
-      ArrayList<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
-              TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
-      empRepo.saveAll(list);
-    }
+      Path path = Paths.get(dataPath + "mock-data.json");
+      if ((empRepo.count() == 0L) && Files.exists(path)) {
+        List<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
+                    TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
+        empRepo.saveAll(list);
+      }
     };
   }
 }
