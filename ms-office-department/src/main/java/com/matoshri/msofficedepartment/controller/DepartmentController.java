@@ -2,7 +2,6 @@ package com.matoshri.msofficedepartment.controller;
 
 import com.matoshri.msofficedepartment.entity.DepartmentDTO;
 import com.matoshri.msofficedepartment.service.DepartmentService;
-import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
