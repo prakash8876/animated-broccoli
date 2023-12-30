@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 @Entity
-@Table(name = "DEPT_EMPLOYEE")
+@Table(name = "EMPLOYEE")
 public class Employee {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long empId;
 
   private String empName;
