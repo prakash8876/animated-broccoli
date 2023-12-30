@@ -15,7 +15,7 @@ spring:
     password: "password"
   jpa:
     hibernate:
-      auto-ddl: "create-drop"
+      auto-ddl: "create"
     open-in-view: false
     show-sql: false
   h2:
@@ -35,4 +35,4 @@ logging:
     org.hibernate.SQL: "DEBUG"
 
 data:
-  path: "src/main/resources/data"
+  path: "ms-office-employee/src/main/resources/data/"

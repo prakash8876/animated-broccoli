@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="MsOfficeEmployeeApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="MsOfficeEmployeeApplication" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
     <option name="ALTERNATIVE_JRE_PATH" value="C:/Java/jdk-17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
