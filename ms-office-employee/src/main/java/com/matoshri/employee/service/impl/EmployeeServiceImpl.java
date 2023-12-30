@@ -6,7 +6,6 @@ import com.matoshri.employee.entity.EmployeeDTO;
 import com.matoshri.employee.exception.EmployeeNotFoundException;
 import com.matoshri.employee.repo.EmployeeRepository;
 import com.matoshri.employee.service.EmployeeService;
-import com.matoshri.employee.util.EmployeeMapper;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import com.matoshri.employee.util.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,10 @@ class EmployeeServiceImpl implements EmployeeService {
 
   private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
   private final EmployeeRepository empRepo;
-  private final EmployeeMapper mapper;
 
   @Autowired
-  public EmployeeServiceImpl(EmployeeRepository empRepo, EmployeeMapper mapper) {
+  public EmployeeServiceImpl(EmployeeRepository empRepo) {
     this.empRepo = empRepo;
-    this.mapper = mapper;
   }
 
   @Override
@@ -43,7 +42,7 @@ class EmployeeServiceImpl implements EmployeeService {
         CompletableFuture.supplyAsync(
             () -> {
               List<Employee> list = empRepo.findAll();
-              return list.parallelStream().map(mapper::mapToDTO).toList();
+              return list.parallelStream().map(EmployeeMapper::mapToDTO).toList();
             });
     employeeDTOS = cf.get();
     return employeeDTOS;
@@ -70,7 +69,7 @@ class EmployeeServiceImpl implements EmployeeService {
   @Override
   public void generateReport() {
     log.info("generating report of employees ...");
-    List<EmployeeDTO> employeeDTOS = empRepo.findAll().stream().map(mapper::mapToDTO).toList();
+    List<EmployeeDTO> employeeDTOS = empRepo.findAll().stream().map(EmployeeMapper::mapToDTO).toList();
     Path path = Paths.get("src/main/resources/data/employee_report_" + LocalDate.now() + ".json");
     try {
       String jsonData =
