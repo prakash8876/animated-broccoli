@@ -8,6 +8,7 @@ import com.matoshri.employee.service.EmployeeService;
 import com.matoshri.employee.util.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository empRepo;
     private final EmployeeMapper mapper;
 
+    @Autowired
     public EmployeeServiceImpl(EmployeeRepository empRepo, EmployeeMapper mapper) {
         this.empRepo = empRepo;
         this.mapper = mapper;
@@ -35,7 +37,7 @@ class EmployeeServiceImpl implements EmployeeService {
         List<EmployeeDTO> employeeDTOS;
         CompletableFuture<List<EmployeeDTO>> cf = CompletableFuture.supplyAsync(() -> {
             List<Employee> list = empRepo.findAll();
-            return list.stream().map(mapper::mapToDTO).toList();
+            return list.parallelStream().map(mapper::mapToDTO).toList();
         });
         employeeDTOS = cf.get();
         return employeeDTOS;

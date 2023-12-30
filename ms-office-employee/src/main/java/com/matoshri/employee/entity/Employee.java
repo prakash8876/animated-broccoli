@@ -19,7 +19,7 @@ public class Employee {
             strategy = GenerationType.SEQUENCE,
             generator = "emp_seq"
     )
-    @Column(name = "empId")
+    @Column(name = "empId", nullable = false, updatable = false)
     private Long empId;
     @Column(name = "empEmail", length = 50)
     @Email(message = "Enter proper email address.")

@@ -6,6 +6,7 @@ import com.matoshri.msofficedepartment.exception.ResourceNotFoundException;
 import com.matoshri.msofficedepartment.repository.DepartmentRepository;
 import com.matoshri.msofficedepartment.repository.EmployeeRepository;
 import com.matoshri.msofficedepartment.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository deptRepo;
     private final EmployeeRepository empRepo;
 
-
+    @Autowired
     public DepartmentServiceImpl(DepartmentRepository deptRepo, EmployeeRepository empRepo) {
         this.deptRepo = deptRepo;
         this.empRepo = empRepo;
@@ -25,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<DepartmentDTO> findAll() {
-        return deptRepo.findAll().stream()
+        return deptRepo.findAll().parallelStream()
                 .map(d -> new DepartmentDTO(d.getDeptId(), d.getDeptName()))
                 .toList();
     }

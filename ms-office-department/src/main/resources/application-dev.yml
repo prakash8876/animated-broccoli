@@ -12,7 +12,7 @@ spring:
     password: "password"
   jpa:
     hibernate:
-      auto-ddl: "update"
+      auto-ddl: "create-drop"
     open-in-view: false
     show-sql: false
   h2:

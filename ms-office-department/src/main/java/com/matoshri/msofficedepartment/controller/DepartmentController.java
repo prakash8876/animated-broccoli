@@ -5,6 +5,7 @@ import com.matoshri.msofficedepartment.service.DepartmentService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class DepartmentController {
     private static final Logger log = LoggerFactory.getLogger(DepartmentController.class);
     private final DepartmentService deptService;
 
+    @Autowired
     public DepartmentController(DepartmentService deptService) {
         this.deptService = deptService;
     }

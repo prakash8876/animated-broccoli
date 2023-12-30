@@ -5,6 +5,7 @@ import com.matoshri.employee.service.EmployeeService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ public class EmployeeController {
     private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
     private final EmployeeService empService;
 
+    @Autowired
     public EmployeeController(EmployeeService empService) {
         this.empService = empService;
     }

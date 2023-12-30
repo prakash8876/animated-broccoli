@@ -21,7 +21,7 @@ public class Department {
             strategy = GenerationType.SEQUENCE,
             generator = "dept_seq"
     )
-    @Column(name = "deptId")
+    @Column(name = "deptId", nullable = false, updatable = false)
     private Long deptId;
 
     @Column(name = "dept_name")
