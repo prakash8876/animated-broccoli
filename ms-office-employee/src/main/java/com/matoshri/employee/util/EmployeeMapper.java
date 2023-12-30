@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-@Component
 public class EmployeeMapper {
 
   private EmployeeMapper() {}
 
-  public Employee mapToEmployee(EmployeeDTO dto) {
+  public static Employee mapToEmployee(EmployeeDTO dto) {
     if (Objects.nonNull(dto.empId())) {
       return new Employee(dto.empId(), dto.empName(), dto.empEmail(), dto.depId());
     } else {
@@ -19,7 +18,7 @@ public class EmployeeMapper {
     }
   }
 
-  public EmployeeDTO mapToDTO(Employee emp) {
+  public static EmployeeDTO mapToDTO(Employee emp) {
     return new EmployeeDTO(emp.getEmpId(), emp.getEmpName(), emp.getEmpEmail(), emp.getDepId());
   }
 }

@@ -11,4 +11,6 @@ public interface EmployeeService {
   Long saveEmployee(EmployeeDTO dto);
 
   EmployeeDTO getEmployeeById(Long empId);
+
+  void generateReport();
 }
