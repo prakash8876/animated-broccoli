@@ -38,9 +38,7 @@ class EmployeeServiceImpl implements EmployeeService {
   public List<EmployeeDTO> getAllEmployees() throws ExecutionException, InterruptedException {
     log.info("Getting all employees");
     List<EmployeeDTO> employeeDTOS;
-    CompletableFuture<List<EmployeeDTO>> cf =
-        CompletableFuture.supplyAsync(
-            () -> {
+    CompletableFuture<List<EmployeeDTO>> cf = CompletableFuture.supplyAsync(() -> {
               List<Employee> list = empRepo.findAll();
               return list.parallelStream().map(EmployeeMapper::mapToDTO).toList();
             });
@@ -60,10 +58,9 @@ class EmployeeServiceImpl implements EmployeeService {
   @Override
   public EmployeeDTO getEmployeeById(Long empId) {
     log.info("Getting employee of ID {}", empId);
-    Employee employee =
-        empRepo.findById(empId).orElseThrow(() -> new EmployeeNotFoundException(empId));
-    return new EmployeeDTO(
-        employee.getEmpId(), employee.getEmpName(), employee.getEmpEmail(), employee.getDepId());
+    Employee employee = empRepo.findById(empId).orElseThrow(() ->
+                new EmployeeNotFoundException(empId));
+    return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpEmail(), employee.getDepId());
   }
 
   @Override
