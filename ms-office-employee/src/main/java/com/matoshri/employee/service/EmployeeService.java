@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface EmployeeService {
-    List<EmployeeDTO> getAllEmployees() throws ExecutionException, InterruptedException;
+  List<EmployeeDTO> getAllEmployees() throws ExecutionException, InterruptedException;
 
-    Long saveEmployee(EmployeeDTO dto);
+  Long saveEmployee(EmployeeDTO dto);
 
-    EmployeeDTO getEmployeeById(Long empId);
+  EmployeeDTO getEmployeeById(Long empId);
 }

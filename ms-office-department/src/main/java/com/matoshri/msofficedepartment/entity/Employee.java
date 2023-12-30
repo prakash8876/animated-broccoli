@@ -6,52 +6,54 @@ import jakarta.validation.constraints.Email;
 @Entity
 @Table(name = "DEPT_EMPLOYEE")
 public class Employee {
-        @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        private Long empId;
-        private String empName;
-        @Email(message = "Enter proper email address.")
-        private String empEmail;
-        private Long depId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private Long empId;
 
-        public Employee() {
-        }
+  private String empName;
 
-        public Employee(String empName, String empEmail, Long depId) {
-                this.empName = empName;
-                this.empEmail = empEmail;
-                this.depId = depId;
-        }
+  @Email(message = "Enter proper email address.")
+  private String empEmail;
 
-        public Long getEmpId() {
-                return empId;
-        }
+  private Long depId;
 
-        public void setEmpId(Long empId) {
-                this.empId = empId;
-        }
+  public Employee() {}
 
-        public String getEmpName() {
-                return empName;
-        }
+  public Employee(String empName, String empEmail, Long depId) {
+    this.empName = empName;
+    this.empEmail = empEmail;
+    this.depId = depId;
+  }
 
-        public void setEmpName(String empName) {
-                this.empName = empName;
-        }
+  public Long getEmpId() {
+    return empId;
+  }
 
-        public String getEmpEmail() {
-                return empEmail;
-        }
+  public void setEmpId(Long empId) {
+    this.empId = empId;
+  }
 
-        public void setEmpEmail(String empEmail) {
-                this.empEmail = empEmail;
-        }
+  public String getEmpName() {
+    return empName;
+  }
 
-        public Long getDepId() {
-                return depId;
-        }
+  public void setEmpName(String empName) {
+    this.empName = empName;
+  }
 
-        public void setDepId(Long depId) {
-                this.depId = depId;
-        }
+  public String getEmpEmail() {
+    return empEmail;
+  }
+
+  public void setEmpEmail(String empEmail) {
+    this.empEmail = empEmail;
+  }
+
+  public Long getDepId() {
+    return depId;
+  }
+
+  public void setDepId(Long depId) {
+    this.depId = depId;
+  }
 }

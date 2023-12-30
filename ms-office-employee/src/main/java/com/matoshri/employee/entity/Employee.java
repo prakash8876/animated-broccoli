@@ -8,96 +8,100 @@ import java.util.Objects;
 @Entity
 @Table(name = "employee")
 public class Employee {
-    @Id
-    @SequenceGenerator(
-            name = "emp_seq",
-            sequenceName = "emp_seq",
-            allocationSize = 1,
-            initialValue = 100
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "emp_seq"
-    )
-    @Column(name = "empId")
-    private Long empId;
-    @Column(name = "empEmail", length = 50)
-    @Email(message = "Enter proper email address.")
-    private String empEmail;
+  @Id
+  @SequenceGenerator(
+      name = "emp_seq",
+      sequenceName = "emp_seq",
+      allocationSize = 1,
+      initialValue = 100)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
+  @Column(name = "empId", nullable = false, updatable = false)
+  private Long empId;
 
-    @Column(name = "empName", length = 20)
-    private String empName;
-    @Column(name = "emp_dep_id")
-    private Long depId;
+  @Column(name = "empEmail", length = 50)
+  @Email(message = "Enter proper email address.")
+  private String empEmail;
 
-    public Employee() {
-    }
+  @Column(name = "empName", length = 20)
+  private String empName;
 
-    public Employee(String empName, String empEmail, Long depId) {
-        this.empEmail = empEmail;
-        this.empName = empName;
-        this.depId = depId;
-    }
+  @Column(name = "emp_dep_id")
+  private Long depId;
 
-    public Employee(Long empId, String empName, String empEmail, Long depId) {
-        this.empId = empId;
-        this.empEmail = empEmail;
-        this.empName = empName;
-        this.depId = depId;
-    }
+  public Employee() {}
 
-    public Long getEmpId() {
-        return empId;
-    }
+  public Employee(String empName, String empEmail, Long depId) {
+    this.empEmail = empEmail;
+    this.empName = empName;
+    this.depId = depId;
+  }
 
-    public void setEmpId(Long empId) {
-        this.empId = empId;
-    }
+  public Employee(Long empId, String empName, String empEmail, Long depId) {
+    this.empId = empId;
+    this.empEmail = empEmail;
+    this.empName = empName;
+    this.depId = depId;
+  }
 
-    public String getEmpEmail() {
-        return empEmail;
-    }
+  public Long getEmpId() {
+    return empId;
+  }
 
-    public void setEmpEmail(String empEmail) {
-        this.empEmail = empEmail;
-    }
+  public void setEmpId(Long empId) {
+    this.empId = empId;
+  }
 
-    public String getEmpName() {
-        return empName;
-    }
+  public String getEmpEmail() {
+    return empEmail;
+  }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
+  public void setEmpEmail(String empEmail) {
+    this.empEmail = empEmail;
+  }
 
-    public Long getDepId() {
-        return depId;
-    }
+  public String getEmpName() {
+    return empName;
+  }
 
-    public void setDepId(Long depId) {
-        this.depId = depId;
-    }
+  public void setEmpName(String empName) {
+    this.empName = empName;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(empId, employee.empId) && Objects.equals(empEmail, employee.empEmail) && Objects.equals(empName, employee.empName);
-    }
+  public Long getDepId() {
+    return depId;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(empId, empEmail, empName);
-    }
+  public void setDepId(Long depId) {
+    this.depId = depId;
+  }
 
-    @Override
-    public String toString() {
-        return new StringBuilder("Employee{")
-                .append(" empId=").append(empId)
-                .append(", empName='").append(empName)
-                .append(", empEmail='").append(empEmail)
-                .append(", depId=").append(depId)
-                .append('}').toString();
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Employee employee = (Employee) o;
+    return Objects.equals(empId, employee.empId)
+        && Objects.equals(empEmail, employee.empEmail)
+        && Objects.equals(empName, employee.empName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(empId, empEmail, empName);
+  }
+
+  @Override
+  public String toString() {
+    return new StringBuilder("Employee{")
+        .append(" empId=")
+        .append(empId)
+        .append(", empName='")
+        .append(empName)
+        .append(", empEmail='")
+        .append(empEmail)
+        .append(", depId=")
+        .append(depId)
+        .append('}')
+        .toString();
+  }
 }

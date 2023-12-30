@@ -23,26 +23,29 @@ import java.util.concurrent.Executor;
 @EnableAsync
 @EnableTransactionManagement
 public class ApiConfig {
-    @Bean
-    public Executor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(2);
-        executor.setMaxPoolSize(2);
-        executor.setQueueCapacity(500);
-        executor.setThreadNamePrefix("EmployeeThread-");
-        executor.initialize();
-        return executor;
-    }
+  @Bean
+  public Executor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(2);
+    executor.setMaxPoolSize(2);
+    executor.setQueueCapacity(500);
+    executor.setThreadNamePrefix("EmployeeThread-");
+    executor.initialize();
+    return executor;
+  }
 
-    @Bean
-    CommandLineRunner runner(EmployeeRepository empRepo) {
-        return args -> {
-            Path path = Paths.get("src/main/resources/data/mock-data.json");
-            if ((empRepo.count() == 0L) && Files.exists(path)) {
-                ArrayList<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
-                        TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
-                empRepo.saveAll(list);
-            }
-        };
-    }
+  @Bean
+  CommandLineRunner runner(EmployeeRepository empRepo) {
+    return args -> {
+      Path path = Paths.get("src/main/resources/data/mock-data.json");
+      if ((empRepo.count() == 0L) && Files.exists(path)) {
+        ArrayList<Employee> list =
+            new Gson()
+                .fromJson(
+                    new JsonReader(new FileReader(path.toFile())),
+                    TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
+        empRepo.saveAll(list);
+      }
+    };
+  }
 }

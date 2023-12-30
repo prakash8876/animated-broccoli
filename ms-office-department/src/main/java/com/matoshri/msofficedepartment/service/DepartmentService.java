@@ -5,10 +5,9 @@ import com.matoshri.msofficedepartment.entity.DepartmentDTO;
 import java.util.List;
 
 public interface DepartmentService {
-    List<DepartmentDTO> findAll();
+  List<DepartmentDTO> findAll();
 
-    DepartmentDTO findById(Long deptId);
+  DepartmentDTO findById(Long deptId);
 
-    Long save(DepartmentDTO dto);
-
+  Long save(DepartmentDTO dto);
 }
