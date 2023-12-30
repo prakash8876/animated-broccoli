@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 @Entity
-@Table(name = "DEPT_EMPLOYEE")
+@Table(name = "EMPLOYEE")
 public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
