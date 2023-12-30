@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException() {
-    }
+  public ResourceNotFoundException() {}
 
-    public ResourceNotFoundException(String message) {
-        super(message);
-    }
+  public ResourceNotFoundException(String message) {
+    super(message);
+  }
 
-    public ResourceNotFoundException(Long deptId) {
-        super("Department doesn't exists: " + deptId);
-    }
+  public ResourceNotFoundException(Long deptId) {
+    super("Department doesn't exists: " + deptId);
+  }
 }

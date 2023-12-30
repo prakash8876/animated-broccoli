@@ -25,26 +25,29 @@ import java.util.concurrent.Executor;
 @EnableTransactionManagement
 @EnableDiscoveryClient
 public class ApiConfig {
-    @Bean
-    public Executor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(2);
-        executor.setMaxPoolSize(2);
-        executor.setQueueCapacity(500);
-        executor.setThreadNamePrefix("DepartmentThread-");
-        executor.initialize();
-        return executor;
-    }
+  @Bean
+  public Executor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(2);
+    executor.setMaxPoolSize(2);
+    executor.setQueueCapacity(500);
+    executor.setThreadNamePrefix("DepartmentThread-");
+    executor.initialize();
+    return executor;
+  }
 
-    @Bean
-    CommandLineRunner runner(DepartmentRepository repo) {
-        return args -> {
-            Path path = Paths.get("src/main/resources/data/mock-data.json");
-            if ((repo.count() == 0L) && Files.exists(path)) {
-                ArrayList<Department> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
-                        TypeToken.getParameterized(ArrayList.class, Department.class).getType());
-                repo.saveAll(list);
-            }
-        };
-    }
+  @Bean
+  CommandLineRunner runner(DepartmentRepository repo) {
+    return args -> {
+      Path path = Paths.get("src/main/resources/data/mock-data.json");
+      if ((repo.count() == 0L) && Files.exists(path)) {
+        ArrayList<Department> list =
+            new Gson()
+                .fromJson(
+                    new JsonReader(new FileReader(path.toFile())),
+                    TypeToken.getParameterized(ArrayList.class, Department.class).getType());
+        repo.saveAll(list);
+      }
+    };
+  }
 }
