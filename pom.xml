@@ -3,9 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>io.matoshri</groupId>
-  <artifactId>my-parent</artifactId>
+  <artifactId>parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <name>MS Office Parent</name>
  
   <modules>
     <module>ms-office-config-server</module>
@@ -13,4 +14,13 @@
     <module>ms-office-department</module>
     <module>ms-office-employee</module>
   </modules>
+
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
