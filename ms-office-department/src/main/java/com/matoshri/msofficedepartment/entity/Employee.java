@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Email;
 @Table(name = "DEPT_EMPLOYEE")
 public class Employee {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long empId;
 
   private String empName;
