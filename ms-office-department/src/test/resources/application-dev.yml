@@ -1,0 +1,35 @@
+
+spring:
+  output:
+    ansi:
+      enabled: "ALWAYS"
+  application:
+    name: "department-service"
+  datasource:
+    url: "jdbc:h2:mem:department-db"
+    driverClassName: "org.h2.Driver"
+    username: "sa"
+    password: "password"
+  jpa:
+    hibernate:
+      auto-ddl: "create-drop"
+    open-in-view: false
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  config:
+    import: "optional:configserver:http://localhost:8088"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    org.hibernate.SQL: "DEBUG"
+
