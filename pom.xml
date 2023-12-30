@@ -8,6 +8,8 @@
   <packaging>pom</packaging>
  
   <modules>
+    <module>ms-office-config-server/pom.xml</module>
+    <module>ms-office-service-registry/pom.xml</module>
     <module>ms-office-department/pom.xml</module>
     <module>ms-office-employee/pom.xml</module>
   </modules>
