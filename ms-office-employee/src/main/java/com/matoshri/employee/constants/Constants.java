@@ -1,4 +1,4 @@
-package com.matoshri.employee.util;
+package com.matoshri.employee.constants;
 
 import org.springframework.stereotype.Component;
 

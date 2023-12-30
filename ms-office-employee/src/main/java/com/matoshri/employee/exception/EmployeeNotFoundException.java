@@ -1,6 +1,6 @@
 package com.matoshri.employee.exception;
 
-import com.matoshri.employee.util.Constants;
+import com.matoshri.employee.constants.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

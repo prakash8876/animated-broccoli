@@ -33,3 +33,6 @@ management:
 logging:
   level:
     org.hibernate.SQL: "DEBUG"
+
+data:
+  path: "src/main/resources/data"
