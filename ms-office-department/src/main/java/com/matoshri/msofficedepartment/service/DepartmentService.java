@@ -10,4 +10,5 @@ public interface DepartmentService {
   DepartmentDTO findById(Long deptId);
 
   Long save(DepartmentDTO dto);
+  void generateReport();
 }
