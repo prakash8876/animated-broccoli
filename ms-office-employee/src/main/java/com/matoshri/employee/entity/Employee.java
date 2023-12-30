@@ -19,8 +19,7 @@ public class Employee {
   private Long empId;
 
   @Column(name = "empEmail", length = 50)
-  @Email(message = "Enter proper email address.")
-  private String empEmail;
+  private @Email String empEmail;
 
   @Column(name = "empName", length = 20)
   private String empName;

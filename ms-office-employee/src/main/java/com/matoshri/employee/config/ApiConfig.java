@@ -39,10 +39,7 @@ public class ApiConfig {
     return args -> {
       Path path = Paths.get("src/main/resources/data/mock-data.json");
       if ((empRepo.count() == 0L) && Files.exists(path)) {
-        ArrayList<Employee> list =
-            new Gson()
-                .fromJson(
-                    new JsonReader(new FileReader(path.toFile())),
+        ArrayList<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
                     TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
         empRepo.saveAll(list);
       }

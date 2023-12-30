@@ -7,6 +7,6 @@ import java.io.Serializable;
 public record EmployeeDTO(
     Long empId,
     String empName,
-    @Email(message = "Enter proper email address.") String empEmail,
+    @Email String empEmail,
     Long depId)
     implements Serializable {}
