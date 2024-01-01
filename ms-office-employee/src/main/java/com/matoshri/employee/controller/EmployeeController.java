@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Tag(name = "EMPLOYEE_TAG")
 @RestController
@@ -43,7 +44,7 @@ public class EmployeeController {
   ResponseEntity<Long> saveEmployee(@RequestBody @Valid EmployeeDTO dto) {
     long empId = empService.saveEmployee(dto);
     log.info("saved employee with id {}", empId);
-    return ResponseEntity.created(URI.create("/save")).body(empId);
+    return ResponseEntity.created(URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save/").toUriString())).body(empId);
   }
 
   @GetMapping(value = "/get/byid/{employee-id}")

@@ -48,7 +48,7 @@ public class ApiConfig implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    Path path = Paths.get(dataPath + "mock-data.json");
+    Path path = Paths.get(dataPath + "mock-data.json").toAbsolutePath().normalize();
     log.info("dummy data from {}", path);
     if ((empRepo.count() <= 0L) && Files.exists(path)) {
       List<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),

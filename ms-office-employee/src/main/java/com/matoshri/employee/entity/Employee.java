@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @JsonInclude(NON_DEFAULT)
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
   @Id
   @SequenceGenerator(
@@ -19,7 +19,7 @@ public class Employee {
       allocationSize = 1,
       initialValue = 100)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
-  @Column(name = "empId", nullable = false, updatable = false)
+  @Column(name = "empId", unique = true, updatable = false)
   private Long empId;
 
   @NotEmpty(message = "Email can't be empty")
