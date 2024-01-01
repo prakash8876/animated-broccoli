@@ -15,6 +15,7 @@ import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +27,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAsync
 @EnableTransactionManagement
-public class ApiConfig {
+public class ApiConfig implements CommandLineRunner {
 
   private Logger log = LoggerFactory.getLogger(ApiConfig.class);
+
+  @Autowired
+  private EmployeeRepository empRepo;
   @Value("${data.path}")
   private String dataPath;
 
@@ -43,16 +47,14 @@ public class ApiConfig {
     return executor;
   }
 
-  @Bean
-  CommandLineRunner run(EmployeeRepository empRepo) {
-    return args -> {
-      Path path = Paths.get(dataPath + "mock-data.json");
-      log.info("dummy data from {}", path);
-      if ((empRepo.count() == 0L) && Files.exists(path)) {
-        List<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
-                    TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
-        empRepo.saveAll(list);
-      }
-    };
+  @Override
+  public void run(String... args) throws Exception {
+    Path path = Paths.get(dataPath + "mock-data.json");
+    log.info("dummy data from {}", path);
+    if ((empRepo.count() <= 0L) && Files.exists(path)) {
+      List<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
+              TypeToken.getParameterized(ArrayList.class, Employee.class).getType());
+      empRepo.saveAll(list);
+    }
   }
 }
