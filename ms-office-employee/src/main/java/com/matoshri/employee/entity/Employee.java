@@ -2,6 +2,7 @@ package com.matoshri.employee.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Objects;
 
@@ -18,9 +19,11 @@ public class Employee {
   @Column(name = "empId", nullable = false, updatable = false)
   private Long empId;
 
+  @NotEmpty(message = "Email can't be empty")
   @Column(name = "empEmail", length = 50)
   private @Email String empEmail;
 
+  @NotEmpty(message = "Name can't be empty")
   @Column(name = "empName", length = 20)
   private String empName;
 

@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class ApiConfig {
 
+  private Logger log = LoggerFactory.getLogger(ApiConfig.class);
   @Value("${data.path}")
   private String dataPath;
 
@@ -46,6 +47,7 @@ public class ApiConfig {
   CommandLineRunner run(EmployeeRepository empRepo) {
     return args -> {
       Path path = Paths.get(dataPath + "mock-data.json");
+      log.info("dummy data from {}", path);
       if ((empRepo.count() == 0L) && Files.exists(path)) {
         List<Employee> list = new Gson().fromJson(new JsonReader(new FileReader(path.toFile())),
                     TypeToken.getParameterized(ArrayList.class, Employee.class).getType());

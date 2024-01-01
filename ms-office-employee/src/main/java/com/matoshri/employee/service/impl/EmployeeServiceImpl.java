@@ -29,7 +29,7 @@ class EmployeeServiceImpl implements EmployeeService {
   private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
   @Value("${data.path}")
-  public String dataPath;
+  private String dataPath;
   private final EmployeeRepository empRepo;
 
   public EmployeeServiceImpl(EmployeeRepository empRepo) {
@@ -52,7 +52,7 @@ class EmployeeServiceImpl implements EmployeeService {
   @Transactional
   public Long saveEmployee(EmployeeDTO dto) {
     log.info("Saving employee {}", dto);
-    Employee emp = new Employee(dto.empName(), dto.empEmail(), dto.depId());
+    Employee emp = new Employee(dto.getEmpName(), dto.getEmpEmail().trim().toLowerCase(), dto.getDepId());
     emp = empRepo.save(emp);
     return emp.getEmpId();
   }

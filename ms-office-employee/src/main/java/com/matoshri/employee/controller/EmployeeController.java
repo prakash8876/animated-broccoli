@@ -50,7 +50,7 @@ public class EmployeeController {
   @GetMapping(value = "/get/byid/{employee-id}")
   ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employee-id") Long empId) {
     EmployeeDTO employeeById = empService.getEmployeeById(empId);
-    log.info("Fetched employee of ID {}", employeeById.empId());
+    log.info("Fetched employee of ID {}", employeeById.getEmpId());
     return ResponseEntity.ok(employeeById);
   }
 }
