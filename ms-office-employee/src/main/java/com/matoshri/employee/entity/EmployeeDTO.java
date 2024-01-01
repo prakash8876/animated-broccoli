@@ -1,9 +1,12 @@
 package com.matoshri.employee.entity;
 
-import jakarta.validation.constraints.Email;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Email;
 import java.io.Serializable;
 
+@JsonInclude(NON_DEFAULT)
 public class EmployeeDTO
     implements Serializable {
 

@@ -1,11 +1,14 @@
 package com.matoshri.employee.entity;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-
 import java.util.Objects;
 
+@JsonInclude(NON_DEFAULT)
 @Entity
 @Table(name = "employee")
 public class Employee {
