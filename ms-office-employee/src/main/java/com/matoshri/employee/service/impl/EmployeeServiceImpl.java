@@ -6,6 +6,7 @@ import com.matoshri.employee.entity.EmployeeDTO;
 import com.matoshri.employee.exception.EmployeeNotFoundException;
 import com.matoshri.employee.repo.EmployeeRepository;
 import com.matoshri.employee.service.EmployeeService;
+import com.matoshri.employee.util.EmployeeMapper;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,8 +15,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-
-import com.matoshri.employee.util.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +28,7 @@ class EmployeeServiceImpl implements EmployeeService {
   private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
   @Value("${data.path}")
-  public String dataPath;
+  private String dataPath;
   private final EmployeeRepository empRepo;
 
   public EmployeeServiceImpl(EmployeeRepository empRepo) {
@@ -52,7 +51,7 @@ class EmployeeServiceImpl implements EmployeeService {
   @Transactional
   public Long saveEmployee(EmployeeDTO dto) {
     log.info("Saving employee {}", dto);
-    Employee emp = new Employee(dto.empName(), dto.empEmail(), dto.depId());
+    Employee emp = new Employee(dto.getEmpName(), dto.getEmpEmail().trim().toLowerCase(), dto.getDepId());
     emp = empRepo.save(emp);
     return emp.getEmpId();
   }

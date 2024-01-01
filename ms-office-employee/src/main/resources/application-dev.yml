@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: '8082'
   servlet:
     context-path: "/office"
 spring:
@@ -7,23 +7,25 @@ spring:
     name: "employee-service"
   output:
     ansi:
-      enabled: "ALWAYS"
+      enabled: 'ALWAYS'
   datasource:
-    url: "jdbc:h2:mem:employee-db"
-    driverClassName: "org.h2.Driver"
+    url: "jdbc:h2:mem:employee-db;DB_CLOSE_ON_EXIT=FALSE"
     username: "sa"
     password: "password"
   jpa:
     hibernate:
-      auto-ddl: "create"
-    open-in-view: false
-    show-sql: false
+      ddl-auto: 'create-drop'
+    open-in-view: 'false'
+    show-sql: 'false'
+    properties:
+      hibernate:
+        "globally_quoted_identifiers": "true"
   h2:
     console:
-      enabled: true
+      enabled: 'true'
   jackson:
     serialization:
-      INDENT_OUTPUT: true
+      INDENT_OUTPUT: 'true'
 management:
   endpoints:
     web:
@@ -32,7 +34,8 @@ management:
 
 logging:
   level:
-    org.hibernate.SQL: "DEBUG"
+    org.hibernate.SQL: 'DEBUG'
+  file: "/logs/employee-app.log"
 
 data:
   path: "ms-office-employee/src/main/resources/data/"

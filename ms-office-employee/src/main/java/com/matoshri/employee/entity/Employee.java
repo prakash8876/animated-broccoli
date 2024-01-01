@@ -1,12 +1,16 @@
 package com.matoshri.employee.entity;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-
+import jakarta.validation.constraints.NotEmpty;
 import java.util.Objects;
 
+@JsonInclude(NON_DEFAULT)
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
   @Id
   @SequenceGenerator(
@@ -15,12 +19,14 @@ public class Employee {
       allocationSize = 1,
       initialValue = 100)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
-  @Column(name = "empId", nullable = false, updatable = false)
+  @Column(name = "empId", unique = true, updatable = false)
   private Long empId;
 
+  @NotEmpty(message = "Email can't be empty")
   @Column(name = "empEmail", length = 50)
   private @Email String empEmail;
 
+  @NotEmpty(message = "Name can't be empty")
   @Column(name = "empName", length = 20)
   private String empName;
 
