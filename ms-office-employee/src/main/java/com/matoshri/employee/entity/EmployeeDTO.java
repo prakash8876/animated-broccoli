@@ -10,6 +10,9 @@ import java.io.Serializable;
 public class EmployeeDTO
     implements Serializable {
 
+    private static final long serialVersionUID =
+            234098243823485285L;
+
     private Long empId;
     private String empName;
     @Email(message = "Invalid email, please enter valid email address.")

@@ -1,9 +1,9 @@
-package com.matoshri.msofficedepartment.util;
+package com.matoshri.msofficedepartment.constants;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Constants {
+public final class Constants {
   public static final String NOT_EXISTS = "Employee Doesn't exists for: ";
 
   private Constants() {}
