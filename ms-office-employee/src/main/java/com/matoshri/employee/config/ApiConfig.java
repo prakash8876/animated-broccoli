@@ -30,10 +30,14 @@ public class ApiConfig implements CommandLineRunner {
 
   private Logger log = LoggerFactory.getLogger(ApiConfig.class);
 
-  @Autowired
   private EmployeeRepository empRepo;
   @Value("${data.path}")
   private String dataPath;
+
+  @Autowired
+  public ApiConfig(EmployeeRepository empRepo) {
+    this.empRepo = empRepo;
+  }
 
   @Bean
   public Executor taskExecutor() {
