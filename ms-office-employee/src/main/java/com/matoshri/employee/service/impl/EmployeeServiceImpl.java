@@ -1,5 +1,6 @@
 package com.matoshri.employee.service.impl;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.matoshri.employee.entity.Employee;
 import com.matoshri.employee.entity.EmployeeDTO;
@@ -28,6 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 class EmployeeServiceImpl implements EmployeeService {
 
   private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+  private static final Gson GSON =
+      new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
   @Value("${data.path}")
   private String dataPath;
@@ -52,17 +55,15 @@ class EmployeeServiceImpl implements EmployeeService {
   @Override
   @Transactional
   public Long saveEmployee(EmployeeDTO dto) {
-    Long id;
     Employee emp = new Employee(dto.getEmpName(), dto.getEmpEmail().trim().toLowerCase(), dto.getDepId());
     emp = empRepo.save(emp);
-    id = emp.getEmpId();
-    log.info("Saved employee {}", dto);
-    return id;
+    EmployeeDTO saved = EmployeeMapper.mapToDTO(emp);
+    log.info("Saved employee {}", saved);
+    return saved.getEmpId();
   }
 
   @Override
   public EmployeeDTO getEmployeeById(Long empId) {
-    EmployeeDTO dto;
     Employee employee;
     employee = empRepo.findById(empId)
                       .orElseThrow(() -> {
@@ -70,7 +71,7 @@ class EmployeeServiceImpl implements EmployeeService {
                         return new EmployeeNotFoundException(empId);
                       });
 
-    dto = new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpEmail(), employee.getDepId());
+    EmployeeDTO dto = new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpEmail(), employee.getDepId());
     log.info("found employee of ID {}", dto.getEmpId());
     return dto;
   }
@@ -87,8 +88,7 @@ class EmployeeServiceImpl implements EmployeeService {
         log.error("Path doesn't exists {}", path.getParent());
       }
 
-      String jsonData =
-          new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(employeeDTOS);
+      String jsonData = GSON.toJson(employeeDTOS);
       Files.write(path, jsonData.getBytes());
     } catch (IOException e) {
       log.error("error while writing to path {}", path, e);

@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class ApiConfig implements CommandLineRunner {
 
-  private Logger log = LoggerFactory.getLogger(ApiConfig.class);
+  private static final Logger log = LoggerFactory.getLogger(ApiConfig.class);
 
   private EmployeeRepository empRepo;
   @Value("${data.path}")
